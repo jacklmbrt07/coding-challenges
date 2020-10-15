@@ -25,31 +25,31 @@ Note: don't modify the input list ls
 */
 
 function chooseBestSum(t, k, ls) {
-    function k_combinations(set, k) {
-    var i, j, combs, head, tailcombs;
-    
+  function k_combinations(set, k) {
+    var i, j, combs, head, tailcombs
+
     // There is no way to take e.g. sets of 5 elements from
     // a set of 4.
     if (k > set.length || k <= 0) {
-      return [];
+      return []
     }
-    
+
     // K-sized set has only one K-sized subset.
     if (k == set.length) {
-      return [set];
+      return [set]
     }
-    
+
     // There is N 1-sized subsets in a N-sized set.
     if (k == 1) {
-      combs = [];
+      combs = []
       for (i = 0; i < set.length; i++) {
-        combs.push([set[i]]);
+        combs.push([set[i]])
       }
-      return combs;
+      return combs
     }
-    
+
     // Assert {1 < k < set.length}
-    
+
     // Algorithm description:
     // To get k-combinations of a set, we want to join each element
     // with all (k-1)-combinations of the other elements. The set of
@@ -67,27 +67,27 @@ function chooseBestSum(t, k, ls) {
     // element so they are already computed and stored. When the length
     // of the subsequent list drops below (k-1), we cannot find any
     // (k-1)-combs, hence the upper limit for the iteration:
-    combs = [];
+    combs = []
     for (i = 0; i < set.length - k + 1; i++) {
       // head is a list that includes only our current element.
-      head = set.slice(i, i + 1);
+      head = set.slice(i, i + 1)
       // We take smaller combinations from the subsequent elements
-      tailcombs = k_combinations(set.slice(i + 1), k - 1);
+      tailcombs = k_combinations(set.slice(i + 1), k - 1)
       // For each (k-1)-combination we join it with the current
       // and store it to the set of k-combinations.
       for (j = 0; j < tailcombs.length; j++) {
-        combs.push(head.concat(tailcombs[j]));
+        combs.push(head.concat(tailcombs[j]))
       }
     }
-    return combs;
+    return combs
   }
-  
-    var combArr = k_combinations(ls, k)
-    if (combArr.length === 0) return null;
-    var distances = combArr.map(arr => {
-      return arr.reduce((a, b) => a + b, 0)
-    })
-    var shortDistances = distances.filter(num => num <= t)
-    var answer = Math.max(...shortDistances)
-    return answer === Number.NEGATIVE_INFINITY ? null : answer;
-  }
+
+  var combArr = k_combinations(ls, k)
+  if (combArr.length === 0) return null
+  var distances = combArr.map((arr) => {
+    return arr.reduce((a, b) => a + b, 0)
+  })
+  var shortDistances = distances.filter((num) => num <= t)
+  var answer = Math.max(...shortDistances)
+  return answer === Number.NEGATIVE_INFINITY ? null : answer
+}
