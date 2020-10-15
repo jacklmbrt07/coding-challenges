@@ -47,23 +47,62 @@ const numStrings = {
     hundred: 100,
     thousand: 1000,
     million: 1000000,
-    and: "+",
 };
 
 function parseInt(string) {
-    var strArr = string.split(" ");
-    // first space words are seperated by multiplication
-    // second space words are seperated by addition (and)
-    // hypen seperated by addition
-    return numStrings[string];
+    // split string seperated by spaces and hyphens
+    var strArr = string.split(/-| /);
+    // convert array of strings into a array of numbers
+    strArr = strArr
+        .filter((str) => str !== "and")
+        .map((str) => numStrings[str]);
+
+    //iterate
+    // while (strArr.length > 1) {
+    for (let i = 0; i < strArr.length; i++) {
+        if (strArr[i] === 100 && strArr[i - 1] < 10) {
+            strArr[i] = strArr[i] * strArr[i - 1];
+            strArr.splice(i - 1, 1);
+        }
+    }
+    for (let i = 0; i < strArr.length; i++) {
+        if (strArr[i] % 100 == 0 && strArr[i] < 1000) {
+            while (strArr[i + 1] < strArr[i]) {
+                strArr[i] = strArr[i] + strArr[i + 1];
+                strArr.splice(i + 1, 1);
+            }
+        }
+    }
+    var millIdx = strArr.indexOf(1000000);
+    if (millIdx != -1) {
+        strArr[millIdx] = strArr[millIdx] * strArr[millIdx - 1];
+        strArr.splice(millIdx - 1, 1);
+    }
+    var thouIdx = strArr.indexOf(1000);
+    if (thouIdx != -1) {
+        strArr[thouIdx] = strArr[thouIdx] * strArr[thouIdx - 1];
+        strArr.splice(thouIdx - 1, 1);
+    }
+
+    // return strArr;
+    return strArr.reduce((a, b) => a + b, 0);
 }
 
 console.log(parseInt("one"));
 console.log(parseInt("twenty"));
+console.log(parseInt("twenty thousand"));
 console.log(parseInt("two hundred forty-six"));
 console.log(
     parseInt("seven hundred eighty-three thousand nine hundred and nineteen")
-); // 783919
+);
+console.log(
+    parseInt(
+        "five hundred twenty-three million nine hundred nineteen thousand twelve"
+    )
+);
+
+// 783919
 //"(((seven*hundred)+(eighty+three))*thousand) + (nine*hundred) + nineteen"
 // (7*100+80+3)*1000+9*100+19 = 783919
-// 2*100+40+6 = 246
+// (((7*100)+80+3)*1000)+((9*100)+19) = 783919
+// ((700+80+3)*1000)+(900+19)
