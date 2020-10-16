@@ -54,7 +54,7 @@ function parseInt(string) {
     var strArr = string.split(/-| /);
     // 3. convert each word into the number it represents
     strArr = strArr
-        .filter((str) => str !== "and")
+        .filter((str) => str !== "and") // remove "and"
         .map((str) => numStrings[str]);
 
     // 4. convert clusters of hundreds into product ex. [7, 100] -> [700]
@@ -97,18 +97,18 @@ function parseInt(string) {
 }
 
 console.log(parseInt("thirty-six thousand eight hundred eighty-nine")); // 36889
-// console.log(parseInt("one")); // 1
-// console.log(parseInt("twenty")); // 20
-// console.log(parseInt("twenty thousand"));
-// console.log(parseInt("two hundred forty-six"));
+console.log(parseInt("one")); // 1
+console.log(parseInt("twenty")); // 20
+console.log(parseInt("twenty thousand"));
+console.log(parseInt("two hundred forty-six"));
 console.log(
     parseInt("seven hundred eighty-three thousand nine hundred and nineteen")
 );
-// console.log(
-//     parseInt(
-//         "five hundred twenty-three million nine hundred nineteen thousand twelve"
-//     )
-// );
+console.log(
+    parseInt(
+        "five hundred twenty-three million nine hundred nineteen thousand twelve"
+    )
+);
 
 // 783919
 //"(((seven*hundred)+(eighty+three))*thousand) + (nine*hundred) + nineteen"
