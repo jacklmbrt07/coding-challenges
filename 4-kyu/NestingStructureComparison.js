@@ -23,9 +23,18 @@ if its argument is an array, false otherwise.
  */
 
 Array.prototype.sameStructureAs = function (other) {
-    // Return 'true' if and only if 'other' has the same
-    // nesting structure as 'this'.
-
-    // Note: You are given a function isArray(o) that returns
-    // whether its argument is an array.
+    return this.length === other.length
+        ? this.every(function (el, i) {
+              return Array.isArray(el) ? el.sameStructureAs(other[i]) : true;
+          })
+        : false;
 };
+
+// Failed, looked up solution from codewars.
+
+console.log([1, [1, 1]].sameStructureAs([[2, 2], 2]));
+// Return 'true' if and only if 'other' has the same
+// nesting structure as 'this'.
+
+// Note: You are given a function isArray(o) that returns
+// whether its argument is an array.
