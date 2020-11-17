@@ -52,12 +52,58 @@ function whoIsWinner(piecesPositionList) {
             gameboard[gameY][gameX] = -1;
         }
         //put piece in place if yellow for -1
+
         // check if there are four consecutive horiziontal, vertical or diaganol pieces
         // declare winner
+        // 24 ways to win horizontally
+        // 21 ways to win vertically
+        // 12 ways to win  / diagonally
+        // 12 ways to win \ diagonally
+        // 69 ways to win total
+        // gameboard can be divided into 12 4x4 matricies
     }
     // else return "draw"
     console.log(gameboard);
     return "Draw";
+}
+
+function checkWinner(curGameboard) {
+    //check horizontal
+    for (let i = 0; i < curGameboard.length; i++) {
+        var horizontal = [0, 0, 0, 0];
+        for (let j = 0; j < horizontal.length; j++) {
+            horizontal[j] =
+                curGameboard[i][j] +
+                curGameboard[i][j + 1] +
+                curGameboard[i][j + 2] +
+                curGameboard[i][j + 3];
+        }
+        if (horizontal.indexOf(4) != -1) {
+            return "Red Wins!";
+        }
+        if (horizontal.indexOf(-4) != -1) {
+            return "Yellow Wins!";
+        }
+    }
+    curGameboardTran = curGameboard[0].map((_, colIndex) =>
+        curGameboard.map((row) => row[colIndex])
+    );
+    for (let i = 0; i < curGameboardTran.length; i++) {
+        var vertical = [0, 0, 0];
+        for (let j = 0; j < vertical.length; j++) {
+            vertical[j] =
+                curGameboardTran[i][j] +
+                curGameboardTran[i][j + 1] +
+                curGameboardTran[i][j + 2] +
+                curGameboardTran[i][j + 3];
+        }
+        if (vertical.indexOf(4) != -1) {
+            return "Red Wins!";
+        }
+        if (vertical.indexOf(-4) != -1) {
+            return "Yellow Wins!";
+        }
+    }
 }
 
 console.log(
