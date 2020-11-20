@@ -70,23 +70,40 @@ function lastDigit(arr) {
                 return d;
         }
     }
+
 }
 
-console.log(lastDigit([0, 0])); // 0 ^ 0
-console.log(lastDigit([0, 0, 0])); // 0^(0 ^ 0) = 0^1 = 0
-console.log(lastDigit([1, 2]));
-console.log(lastDigit([3, 4, 5]));
-console.log(lastDigit([4, 3, 6]));
-console.log(lastDigit([7, 6, 21]));
-console.log(lastDigit([12, 30, 21]));
-console.log(lastDigit([2, 2, 2, 0]));
-console.log(lastDigit([937640, 767456, 981242]));
-console.log(lastDigit([123232, 694022, 140249]));
-console.log(lastDigit([499942, 898102, 846073]));
+function modulo (n, p, m) {
+    var result = 1;
+    while(p--){
+        result = (result * n) % m
 
-var r1 = Math.floor(Math.random() * 100);
-var r2 = Math.floor(Math.random() * 10);
+    }
+    return result
+}
 
-console.log(lastDigit([]));
-console.log(lastDigit([r1]));
-console.log(lastDigit([r1, r2]));
+console.log(modulo(767456, 140248, 4))
+
+
+// console.log((767456 ** 140248) % 10)
+
+// console.log(lastDigit([0, 0])); // 0 ^ 0
+// console.log(lastDigit([0, 0, 0])); // 0^(0 ^ 0) = 0^1 = 0
+// console.log(lastDigit([1, 2]));
+// console.log(lastDigit([3, 4, 5]));
+// console.log(lastDigit([4, 3, 6]));
+// console.log(lastDigit([7, 6, 21]));
+// console.log(lastDigit([12, 30, 21]));
+// console.log(lastDigit([2, 2, 2, 0]));
+// console.log(lastDigit([937640, 767456, 981242]));
+// console.log(lastDigit([123232, 694022, 140249]));
+// console.log(lastDigit([499942, 898102, 846073]));
+// console.log(lastDigit([694022, 140249]));
+// console.log(lastDigit([ 898102, 846073]));
+
+// var r1 = Math.floor(Math.random() * 100);
+// var r2 = Math.floor(Math.random() * 10);
+
+// console.log(lastDigit([]));
+// console.log(lastDigit([r1]));
+// console.log(lastDigit([r1, r2]));
