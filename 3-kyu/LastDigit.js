@@ -17,93 +17,83 @@ source  from: https://exponentcalculator.net/Tutorials/How-to-find-the-last-digi
  */
 
 function lastDigit(arr) {
-    if (arr.length == 0) return 1;
-    else if (arr.length == 1) return arr[0] % 10;
-    else {
-        while (arr.length > 2) {
-            arr[arr.length - 2] = arr[arr.length - 2] ** arr[arr.length - 1];
-            arr.pop();
-        }
-        if (arr[1] == 0) return 1;
-        switch (arr[0] % 10) {
-            case 0:
-                return 0;
-            case 1:
-                return 1;
-            case 2:
-                return mod4(arr[1], 6, 2, 4, 8);
-            case 3:
-                return mod4(arr[1], 1, 3, 9, 7);
-            case 4:
-                return mod2(arr[1], 6, 4);
-            case 5:
-                return 5;
-            case 6:
-                return 6;
-            case 7:
-                return mod4(arr[1], 1, 7, 9, 3);
-            case 8:
-                return mod4(arr[1], 6, 8, 4, 2);
-            case 9:
-                return mod2(arr[1], 9, 1);
-        }
+    const x = arr[1] % 4;
+    const y = arr[0] % 10;
+    switch (arr.length) {
+        case 0:
+            return 1;
+        case 1:
+            return arr[0] % 10;
+        case 2:
+            if (arr[1] == 0) return 1;
+            const table = [
+                [0, 0, 0, 0],
+                [1, 1, 1, 1],
+                [6, 2, 4, 8],
+                [1, 3, 9, 7],
+                [6, 4, 6, 4],
+                [5, 5, 5, 5],
+                [6, 6, 6, 6],
+                [1, 7, 9, 3],
+                [6, 8, 4, 2],
+                [9, 1, 9, 1],
+            ];
+            return table[y][x];
+        default:
+            switch (arr[2] % 2) {
+                case 0:
+                    const evenTable = [
+                        [0, 0, 0, 0],
+                        [1, 1, 1, 1],
+                        [2, 6, 2, 6],
+                        [3, 1, 3, 1],
+                        [4, 6, 4, 6],
+                        [5, 5, 5, 5],
+                        [6, 6, 6, 6],
+                        [7, 1, 7, 1],
+                        [8, 6, 8, 6],
+                        [9, 1, 9, 1],
+                    ];
+                    console.log(evenTable[y])
+                    console.log(x)
+                    return evenTable[y][x];
+                case 1:
+                    const oddTable = [
+                        [0, 0, 0, 0],
+                        [1, 1, 1, 1],
+                        [2, 6, 6, 6],
+                        [3, 1, 7, 1],
+                        [4, 6, 4, 6],
+                        [5, 5, 5, 5],
+                        [6, 6, 6, 6],
+                        [7, 1, 3, 1],
+                        [8, 6, 8, 6],
+                        [9, 1, 9, 1],
+                    ];
+                    console.log(oddTable[y])
+                    console.log(x)
+                    return oddTable[y][x];
+            }
     }
-
-    function mod2(exp, a, b) {
-        switch (exp % 2) {
-            case 0:
-                return a;
-            case 1:
-                return b;
-        }
-    }
-
-    function mod4(exp, a, b, c, d) {
-        switch (exp % 4) {
-            case 0:
-                return a;
-            case 1:
-                return b;
-            case 2:
-                return c;
-            case 3:
-                return d;
-        }
-    }
-
 }
 
-function modulo (n, p, m) {
-    var result = 1;
-    while(p--){
-        result = (result * n) % m
+console.log(lastDigit([0, 0])); // 0 ^ 0
+console.log(lastDigit([0, 0, 0])); // 0^(0 ^ 0) = 0^1 = 0
+console.log(lastDigit([1, 2]));
+console.log(lastDigit([3, 4, 5]));
+console.log(lastDigit([4, 3, 6]));
+console.log(lastDigit([7, 6, 21]));
+console.log(lastDigit([12, 30, 21]));
+console.log(lastDigit([2, 0, 2, 0]));
+console.log(lastDigit([937640, 767456, 981242]));
+console.log(lastDigit([123232, 694022, 140249]));
+console.log(lastDigit([499942, 898102, 846073]));
+console.log(lastDigit([694022, 140249]));
+console.log(lastDigit([898102, 846073]));
 
-    }
-    return result
-}
+var r1 = Math.floor(Math.random() * 100);
+var r2 = Math.floor(Math.random() * 10);
 
-console.log(modulo(767456, 140248, 4))
-
-
-// console.log((767456 ** 140248) % 10)
-
-// console.log(lastDigit([0, 0])); // 0 ^ 0
-// console.log(lastDigit([0, 0, 0])); // 0^(0 ^ 0) = 0^1 = 0
-// console.log(lastDigit([1, 2]));
-// console.log(lastDigit([3, 4, 5]));
-// console.log(lastDigit([4, 3, 6]));
-// console.log(lastDigit([7, 6, 21]));
-// console.log(lastDigit([12, 30, 21]));
-// console.log(lastDigit([2, 2, 2, 0]));
-// console.log(lastDigit([937640, 767456, 981242]));
-// console.log(lastDigit([123232, 694022, 140249]));
-// console.log(lastDigit([499942, 898102, 846073]));
-// console.log(lastDigit([694022, 140249]));
-// console.log(lastDigit([ 898102, 846073]));
-
-// var r1 = Math.floor(Math.random() * 100);
-// var r2 = Math.floor(Math.random() * 10);
-
-// console.log(lastDigit([]));
-// console.log(lastDigit([r1]));
-// console.log(lastDigit([r1, r2]));
+console.log(lastDigit([]));
+console.log(lastDigit([r1]));
+console.log(lastDigit([r1, r2]));
