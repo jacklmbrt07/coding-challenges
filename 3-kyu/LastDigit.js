@@ -45,33 +45,33 @@ function lastDigit(arr) {
                     const evenTable = [
                         [0, 0, 0, 0],
                         [1, 1, 1, 1],
-                        [2, 6, 2, 6],
-                        [3, 1, 3, 1],
-                        [4, 6, 4, 6],
-                        [5, 5, 5, 5],
-                        [6, 6, 6, 6],
-                        [7, 1, 7, 1],
-                        [8, 6, 8, 6],
-                        [9, 1, 9, 1],
+                        [1, 2, 6, 2],
+                        [1, 3, 1, 3],
+                        [1, 4, 6, 4],
+                        [1, 5, 5, 5],
+                        [1, 6, 6, 6],
+                        [1, 7, 1, 7],
+                        [1, 8, 6, 8],
+                        [1, 9, 1, 9],
                     ];
-                    console.log(evenTable[y])
-                    console.log(x)
+                    console.log(evenTable[y]);
+                    console.log(x);
                     return evenTable[y][x];
                 case 1:
                     const oddTable = [
                         [0, 0, 0, 0],
                         [1, 1, 1, 1],
-                        [2, 6, 6, 6],
-                        [3, 1, 7, 1],
-                        [4, 6, 4, 6],
-                        [5, 5, 5, 5],
-                        [6, 6, 6, 6],
-                        [7, 1, 3, 1],
-                        [8, 6, 8, 6],
-                        [9, 1, 9, 1],
+                        [1, 2, 6, 6],
+                        [1, 3, 1, 7],
+                        [1, 4, 6, 4],
+                        [1, 5, 5, 5],
+                        [1, 6, 6, 6],
+                        [1, 7, 1, 3],
+                        [1, 8, 6, 8],
+                        [1, 9, 1, 9],
                     ];
-                    console.log(oddTable[y])
-                    console.log(x)
+                    console.log(oddTable[y]);
+                    console.log(x);
                     return oddTable[y][x];
             }
     }
