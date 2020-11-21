@@ -26,20 +26,44 @@ A unit of time must be used "as much as possible". It means that the function sh
  */
 
 function formatDuration(seconds) {
-    var sec, min, hr, day, year
-    sec = seconds % 60
-    min = ((seconds - sec) / 60) % 60
-    hr = ((((seconds - sec) / 60) - min) / 60) % 60
-    console.log(hr, min, sec)
-    // if var = 0 return ''
-    // if var = 1 return '1 var'
-    // if var > 1 return 'x vars'
-    // years hours minutes seperated by ", "
-    // seconds seperated by " and "
+    var sec, min, hr, day, year, string;
+    sec = seconds % 60;
+    min = Math.floor(seconds / 60) % 60;
+    hr = Math.floor(seconds / (60 * 60)) % 24;
+    day = Math.floor(seconds / (60 * 60 * 24)) % 365;
+    year = Math.floor(seconds / (60 * 60 * 24 * 365));
+
+    strObj = [
+        { name: `year${year != 1 ? "s" : ""}`, value: year },
+        { name: `day${day != 1 ? "s" : ""}`, value: day },
+        { name: `hour${hr != 1 ? "s" : ""}`, value: hr },
+        { name: `minute${min != 1 ? "s" : ""}`, value: min },
+        { name: `second${sec != 1 ? "s" : ""}`, value: sec },
+    ];
+
+    strObj = strObj.filter((time) => time.value != 0);
+
+    for (let i = 0; i < strObj.length; i++) {
+        strObj[i] = `${strObj[i].value} ${strObj[i].name}`;
+    }
+
+    if (strObj.length > 1) {
+        var lastArr = strObj.slice(strObj.length - 1, strObj.length);
+        strObj.pop();
+    }
+
+    if (seconds == 0) return "now";
+    else if (lastArr) {
+        return strObj.join(", ") + " and " + lastArr;
+    } else {
+        return strObj.join(", ");
+    }
 }
 
 console.log(formatDuration(1)); // "1 second"
 console.log(formatDuration(62)); //, "1 minute and 2 seconds");
 console.log(formatDuration(120)); //, "2 minutes");
 console.log(formatDuration(3600)); //, "1 hour");
-console.log(formatDuration(876876)); //, "1 hour, 1 minute and 2 seconds");
+console.log(formatDuration(3662)); //, "1 hour, 1 minute and 2 seconds");
+console.log(formatDuration(98742));
+console.log(formatDuration(31557600));
