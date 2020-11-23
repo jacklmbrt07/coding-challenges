@@ -1,16 +1,4 @@
 function validateBattlefield(field) {
-    const transposeField = field;
-    const ships = [
-        {
-            name: "battleship",
-            size: 4,
-            qty: 1,
-            coordinates: findBattleship(field),
-        },
-        { name: "cruiser", size: 3, qty: 2 },
-        { name: "destroyer", size: 2, qty: 3 },
-        { name: "submarine", size: 1, qty: 4 },
-    ];
     checkSum = (field) => {
         var sum = 0;
         for (let i = 0; i < field.length; i++) {
@@ -19,6 +7,28 @@ function validateBattlefield(field) {
         if (sum != 20) return false;
         return true;
     };
+    const transposeField = field;
+    const ships = [
+        {
+            name: "battleship",
+            size: 4,
+            qty: 1,
+            coordinates: findBattleship(field),
+        },
+        { name: "cruiser", size: 3, qty: 2, coordinates: findCruisers(field) },
+        {
+            name: "destroyer",
+            size: 2,
+            qty: 3,
+            coordinates: findDestroyers(field),
+        },
+        {
+            name: "submarine",
+            size: 1,
+            qty: 4,
+            coordinates: findSubmarines(field),
+        },
+    ];
     findBattleship = (field) => {
         // horizontal
         for (let i = 0; i < field.length; i++) {
@@ -57,7 +67,9 @@ function validateBattlefield(field) {
         }
         return false;
     };
-    findCruiser = (field) => {};
+    findCruisers = (field) => {};
+    findDestroyers = (field) => {};
+    findSubmarines = (field) => {};
 }
 
 console.log(
