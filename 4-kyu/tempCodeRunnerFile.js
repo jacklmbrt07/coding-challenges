@@ -1,2 +1,3 @@
-
-    console.log(strObj);
+    // Object.values(counts).forEach(element => {
+    //     element = factorial(element)
+    // });
