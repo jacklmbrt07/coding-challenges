@@ -15,15 +15,21 @@ Your function should take an amount to change and an array of unique denominatio
  */
 
 const countChange = (money, coins) => {
-    var count = 0;
-    // 1. sort the coins array in descending order, and remove values larger than money
-            //1a if coin array is empty return 0;
+    var combinations = new Array(money + 1).fill(0);
 
+    combinations[0] = 1;
 
+    for (let i = 0; i < coins.length; i++) {
+        for (let j = 1; j < combinations.length; j++) {
+            if (j >= coins[i]) {
+                combinations[j] += combinations[j - coins[i]];
+            }
+        }
+    }
 
-    return count;
+    return combinations[money];
 };
 
-console.log(4, [1, 2]); // 3
-console.log(10, [5, 2, 3]); // 4
-console.log(4, [5, 7]); // 0
+console.log(countChange(4, [1, 2])); // 3
+console.log(countChange(10, [5, 2, 3])); // 4
+console.log(countChange(4, [5, 7])); // 0
