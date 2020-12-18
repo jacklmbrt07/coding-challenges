@@ -7,6 +7,9 @@
         "test": "test"
     },
     "dependencies": {
+        "@codewars/test-compat": "^1.0.0",
+        "chai": "^4.2.0",
+        "node": "^15.4.0",
         "prettier": "^2.1.2"
     },
     "devDependencies": {
